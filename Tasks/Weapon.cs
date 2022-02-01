@@ -26,17 +26,25 @@ namespace Napilnik
 
         public void TryTakeDamage(float damage)
         {
-            if (damage > _health)
-                throw new ArgumentException(nameof(damage));
-
             _health -= damage;
+            
+            if (_health <= 0)
+            {
+                _health = 0;
+                Console.WriteLine("Player dead");
+            }
         }
     }
 
     class Bot
     {
-        public Weapon Weapon;
+        public Weapon Weapon { get; private set; }
 
+        public Bot(Weapon weapon)
+        {
+            Weapon = weapon;
+        }
+        
         public void OnSeePlayer(Player player)
         {
             Weapon.Fire(player);
