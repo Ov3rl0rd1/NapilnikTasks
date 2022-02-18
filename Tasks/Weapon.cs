@@ -2,44 +2,58 @@ using System;
 
 namespace Napilnik
 {
-    class Weapon
+    internal class Weapon
     {
-        public int Damage { get; private set; }
-        public int Bullets { get; private set; }
+        private int _damage;
+
+        private int _bullets;
 
         public Weapon(int damage, int bullets)
         {
-            Damage = damage;
-            Bullets = bullets;
+            _damage = damage;
+            _bullets = bullets;
         }
+
+        public int Damage => _damage;
+
+        public int Bullets => _bullets;
 
         public void Fire(Player player)
         {
-            player.TryTakeDamage(Damage);
-            Bullets -= 1;
+            player.TryTakeDamage(_damage);
+            _bullets -= 1;
         }
     }
 
-    class Player
+    internal class Player
     {
         private float _health;
+
+        public float Health => _health;
 
         public void TryTakeDamage(float damage)
         {
             if (damage > _health)
-                throw new ArgumentException(nameof(damage));
+                damage = _health;
 
             _health -= damage;
         }
     }
 
-    class Bot
+    internal class Bot
     {
-        public Weapon Weapon;
+        private Weapon _weapon;
+
+        public Bot(Weapon weapon)
+        {
+            _weapon = weapon;
+        }
+
+        public Weapon Weapon => _weapon;
 
         public void OnSeePlayer(Player player)
         {
-            Weapon.Fire(player);
+            _weapon.Fire(player);
         }
     }
 }
