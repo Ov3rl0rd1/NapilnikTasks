@@ -29,6 +29,11 @@ namespace Napilnik
     {
         private float _health;
 
+        public Player(float health)
+        {
+            _health = health;
+        }
+
         public float Health => _health;
 
         public void TryTakeDamage(float damage)
