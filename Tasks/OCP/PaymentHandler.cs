@@ -5,12 +5,12 @@ namespace IMJunior
 {
     public class PaymentHandler
     {
-        private IReadOnlyCollection<IPayment> _paymentMethods = new IPayment[] { new QIWI(), new WebMoney(), new Card() };
+        public IReadOnlyCollection<IPayment> PaymentMethods = new IPayment[] { new QIWI(), new WebMoney(), new Card() };
 
         public void ShowPaymentResult(string systemId)
         {
             IPayment paymentMethod = null;
-            foreach (var e in _paymentMethods)
+            foreach (var e in PaymentMethods)
                 if (e.Id == systemId)
                     paymentMethod = e;
 

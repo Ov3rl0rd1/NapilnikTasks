@@ -9,7 +9,7 @@ namespace IMJunior
             var orderForm = new OrderForm();
             var paymentHandler = new PaymentHandler();
 
-            var systemId = orderForm.ShowForm();
+            var systemId = orderForm.ShowForm(paymentHandler);
 
             paymentHandler.ShowPaymentResult(systemId);
         }
