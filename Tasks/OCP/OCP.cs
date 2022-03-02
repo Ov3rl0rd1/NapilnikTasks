@@ -11,7 +11,7 @@ namespace IMJunior
 
             var systemId = orderForm.ShowForm(paymentHandler);
 
-            paymentHandler.ShowPaymentResult(systemId);
+            paymentHandler.Pay(systemId);
         }
     }
 }

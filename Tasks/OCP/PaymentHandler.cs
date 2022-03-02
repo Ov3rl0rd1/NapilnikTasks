@@ -16,7 +16,7 @@ namespace IMJunior
             PaymentMethods = paymentMethods;
         }
 
-        public void ShowPaymentResult(string systemId)
+        public void Pay(string systemId)
         {
             IPayment paymentMethod = null;
             foreach (var e in PaymentMethods)
