@@ -27,8 +27,8 @@ namespace IMJunior
                 throw new ArgumentException(nameof(systemId));
 
             Console.WriteLine(paymentMethod.CallAPI);
-            Console.WriteLine($"Вы оплатили с помощью {systemId}");
-            Console.WriteLine($"Проверка платежа через {systemId}...");
+            Console.WriteLine($"Вы оплатили с помощью {paymentMethod.Id}");
+            Console.WriteLine($"Проверка платежа через {paymentMethod.Id}...");
             Console.WriteLine("Оплата прошла успешно!");
         }
 
