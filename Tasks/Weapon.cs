@@ -4,25 +4,34 @@ namespace Napilnik
 {
     internal class Weapon
     {
-        private int _damage;
+        public readonly int Damage;
 
         private int _bullets;
 
         public Weapon(int damage, int bullets)
         {
-            _damage = damage;
+            if (damage < 0)
+                throw new ArgumentException(nameof(damage));
+            if (bullets < 0)
+                throw new ArgumentException(nameof(bullets));
+
+            Damage = damage;
             _bullets = bullets;
         }
 
-        public int Damage => _damage;
-
-        public int Bullets => _bullets;
+        public virtual bool CanShoot => _bullets > 0;
 
         public void Fire(Player player)
         {
-            player.TryTakeDamage(_damage);
+            if (player == null)
+                throw new ArgumentNullException(nameof(player));
+            if (CanShoot)
+                throw new InvalidOperationException();
+
+            player.TryTakeDamage(Damage);
             _bullets -= 1;
         }
+
     }
 
     internal class Player
@@ -31,6 +40,9 @@ namespace Napilnik
 
         public Player(float health)
         {
+            if (health <= 0)
+                throw new ArgumentOutOfRangeException(nameof(health));
+
             _health = health;
         }
 
@@ -38,6 +50,9 @@ namespace Napilnik
 
         public void TryTakeDamage(float damage)
         {
+            if (damage < 0)
+                throw new ArgumentOutOfRangeException(nameof(damage));
+
             if (damage > _health)
                 damage = _health;
 
@@ -51,14 +66,16 @@ namespace Napilnik
 
         public Bot(Weapon weapon)
         {
+            if (weapon == null)
+                throw new ArgumentNullException(nameof(weapon));
+
             _weapon = weapon;
         }
 
-        public Weapon Weapon => _weapon;
-
         public void OnSeePlayer(Player player)
         {
-            _weapon.Fire(player);
+            if (_weapon.CanShoot)
+                _weapon.Fire(player);
         }
     }
 }
