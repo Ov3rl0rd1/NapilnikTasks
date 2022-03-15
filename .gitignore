@@ -3,3 +3,14 @@
 *.csproj
 *.settings
 *.resx
+*.config
+*.force
+*.cache
+*.p7s
+*.png
+*.nupkg
+*.dll
+*.transform
+*.txt
+*.xml
+*._
