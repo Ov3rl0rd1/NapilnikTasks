@@ -28,8 +28,7 @@ namespace SQLTask
 
         private static DataTable GetDataTable(string passport)
         {
-            if (SQLDB.IsConnected == false)
-                throw new InvalidOperationException();
+            SQLDB.Connect();
 
             string commandText = $"select * from passports where num='{ComputeSha256Hash(passport)}' limit 1;";
             DataTable dataTable = SQLDB.GetDataTable(commandText);

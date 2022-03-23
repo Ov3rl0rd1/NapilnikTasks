@@ -17,17 +17,17 @@ namespace SQLTask
 
         private void FindPassport(string rawData)
         {
+            string result;
+
             try
             {
-                SQLDB.Connect();
+                result = PassportFinder.Find(rawData);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return;
             }
-
-            string result = PassportFinder.Find(rawData);
 
             textResult.Text = result;
         }
